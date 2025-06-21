@@ -63,7 +63,6 @@ sudo apt dist-upgrade
 ```
 
 ```bash
-source /opt/ros/humble/setup.bash
 rosdep install -r --from-paths . --ignore-src -y
 ```
 
@@ -78,8 +77,6 @@ colcon mixin update default
 ### 编译
 
 ```bash
-source /opt/ros/humble/setup.bash
-cd ~/Documents/ros2/moveit2_main_ws
 colcon build --symlink-install --mixin release compile-commands
 ```
 
@@ -97,30 +94,27 @@ if [ -f ~/.local/ros2_rc ]; then
 fi
 ```
 
-注意：
+### 注意事项
 
-1. 如果你之前在 ~/.bashrc 或类似的地方有自动 source 系统 ROS 2 的代码，请将其删除。ros2_rc 脚本会处理对系统 ROS 2 的 source。
+- 如果你之前在 ~/.bashrc 或类似的地方有自动 source 系统 ROS 2 的代码，请将其删除。ros2_rc 脚本会处理对系统 ROS 2 的 source。
 
-2. 如果你使用 zsh，请对 ~/.zshrc 也做类似的修改。
+- 如果你使用 zsh，请对 ~/.zshrc 也做类似的修改。
 
-默认情况下， ros2_rc 不会自动 source 系统 ROS 2 和 MoveIt 2 workspace。这可以防止 ROS 2 对 PYTHONPATH 等环境变量的污染，从而避免一些奇怪的问题。如需使用 ROS 2，请在每个新终端手动执行以下命令：
+- 默认情况下， ros2_rc 不会自动 source 系统 ROS 2 和 MoveIt 2 workspace。这可以防止 ROS 2 对 PYTHONPATH 等环境变量的污染，从而避免一些奇怪的问题。如需使用 ROS 2，请在每个新终端手动执行以下命令：
+    ```bash
+    rr
+    ```
+    之后 main 分支的 MoveIt 2 就好像已经安装在系统中一样，可以直接使用。
 
-```bash
-rr
-```
+    > 如果你希望 ros2_rc 自动 source 系统 ROS 2 和 MoveIt 2 workspace，可以取消 `ros2_rc` 脚本末尾注释掉的 `rr`。
 
-之后 main 分支的 MoveIt 2 就好像已经安装在系统中一样，可以直接使用。
+- ros2_rc 还提供了 `rs` 命令，可以快速完成下面的几件事：
+    1. `rr`
+    2. 自动检测当前终端类型，source install/setup.bash 或 install/setup.zsh
 
-如果你希望 ros2_rc 自动 source 系统 ROS 2 和 MoveIt 2 workspace，可以取消 `ros2_rc` 脚本末尾注释掉的 `rr`。
+    因此，如果你想 source 当前工作空间，可以直接运行：
 
-ros2_rc 还提供了 `rs` 命令，可以快速完成下面的几件事：
-
-1. `rr`
-2. 自动检测当前终端类型，source install/setup.bash 或 install/setup.zsh
-
-因此，如果你想 source 当前工作空间，可以直接运行：
-
-```bash
-# 无需执行 rr
-rs
-```
+    ```bash
+    # 无需执行 rr
+    rs
+    ```
