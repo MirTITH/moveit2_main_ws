@@ -7,3 +7,6 @@
 [submodule "src/moveit_msgs"]
 	path = src/moveit_msgs
 	url = https://github.com/moveit/moveit_msgs.git
+[submodule "src/pick_ik"]
+	path = src/pick_ik
+	url = https://github.com/PickNikRobotics/pick_ik.git
