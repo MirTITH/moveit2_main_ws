@@ -10,3 +10,7 @@
 [submodule "src/pick_ik"]
 	path = src/pick_ik
 	url = https://github.com/PickNikRobotics/pick_ik.git
+[submodule "src/trac_ik"]
+	path = src/trac_ik
+	url = https://bitbucket.org/traclabs/trac_ik.git
+	branch = jazzy
