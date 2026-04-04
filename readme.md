@@ -8,14 +8,13 @@
 
 ## 构建 MoveIt 工作空间
 
-### 删除所有 apt 安装的 moveit 相关包
+### 1. 删除所有 apt 安装的 moveit 相关包
 
 ```bash
-source /opt/ros/humble/setup.bash
-sudo apt purge "ros-$ROS_DISTRO-moveit*"
+sudo apt purge "ros-*-moveit*"
 ```
 
-### 克隆代码
+### 2. 克隆代码
 ```bash
 # 以在 ~/Documents/ros2/moveit2_main_ws 构建工作区为例，你也可以放到其他地方
 mkdir -p ~/Documents/ros2
@@ -38,7 +37,7 @@ git config submodule.recurse true
 git submodule update --init --recursive
 ```
 
-### 修改代码
+### 3. 修改代码
 
 忽略不需要的包
 
@@ -47,7 +46,7 @@ git submodule update --init --recursive
 touch src/moveit2/moveit_ros/tests/COLCON_IGNORE
 ```
 
-### 安装依赖
+### 4. 安装依赖
 
 如果还没有安装 rosdep，请先安装 rosdep：
 ```bash
@@ -62,11 +61,7 @@ sudo apt update
 sudo apt dist-upgrade
 ```
 
-```bash
-rosdep install -r --from-paths . --ignore-src -y
-```
-
-### 安装 colcon mixin
+安装 colcon mixin：
 
 ```bash
 sudo apt install python3-colcon-common-extensions python3-colcon-mixin
@@ -74,10 +69,10 @@ colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-r
 colcon mixin update default
 ```
 
-### 编译
+### 5. 编译
 
 ```bash
-colcon build --symlink-install --mixin release compile-commands
+./build.sh
 ```
 
 注意：编译之后如果将工作空间移动到了其他位置，需要删除 build install 文件夹，再次编译
