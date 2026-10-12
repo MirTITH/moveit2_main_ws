@@ -2,6 +2,8 @@
 
 set -e
 
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+
 # Check if ninja and ccache are installed. if not, install them.
 pkg_to_install=""
 
